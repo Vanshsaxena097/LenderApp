@@ -131,6 +131,7 @@ class PrimaryColors {
   Color get black900 => Color(0XFF000000);
 // BlueGray
   Color get blueGray400 => Color(0XFF888888);
+  Color get blue70044 => Color(0X441164DF);
 // Gray
   Color get gray100 => Color(0XFFF5F5F5);
   Color get gray300 => Color(0XFFE0E0E0);

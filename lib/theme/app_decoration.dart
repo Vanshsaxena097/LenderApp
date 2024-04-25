@@ -18,6 +18,7 @@ class AppDecoration {
   static BoxDecoration get fillYellow => BoxDecoration(
         color: appTheme.yellow50,
       );
+
 // Outline decorations
   static BoxDecoration get outlineBlack => BoxDecoration(
         color: appTheme.yellow50,

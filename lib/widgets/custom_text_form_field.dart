@@ -6,6 +6,10 @@ extension TextFormFieldStyleHelper on CustomTextFormField {
         borderRadius: BorderRadius.circular(18.h),
         borderSide: BorderSide.none,
       );
+  static OutlineInputBorder get fillYellow => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(27.h),
+    borderSide: BorderSide.none,
+  );
 }
 
 class CustomTextFormField extends StatelessWidget {

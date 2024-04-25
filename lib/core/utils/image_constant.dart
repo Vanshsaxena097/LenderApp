@@ -7,6 +7,7 @@ class ImageConstant {
   static String imgVector = '$imagePath/img_vector.svg';
 
   static String imgBxbxhide = '$imagePath/img_bxbxhide.svg';
+  static String imgCalendar = '$imagePath/img_calendar.svg';
 
   static String imgFlatColorIconsGoogle =
       '$imagePath/img_flat_color_icons_google.svg';

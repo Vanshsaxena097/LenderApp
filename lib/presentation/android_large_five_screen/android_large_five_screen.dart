@@ -206,12 +206,12 @@ class AndroidLargeFiveScreen extends StatelessWidget {
 
           // Example image paths
           List<String> imagePaths = [
-            'assets/images/img_download_8.png',
+            'assets/images/img_images_3.png',
             'assets/images/img_images_3.png',
             'assets/images/img_images_2.png',
-            'assets/images/img_download_9.png',
+            'assets/images/img_images_4.png',
             'assets/images/img_download_11.png',
-            'assets/images/img_download_14.png',
+            'assets/images/img_download_22.png',
           ];
 
           return Column(
