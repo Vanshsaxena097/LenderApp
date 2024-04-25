@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../core/app_export.dart';
 import '../presentation/android_large_eight_screen/android_large_eight_screen.dart';
 import '../presentation/android_large_five_screen/android_large_five_screen.dart';
 import '../presentation/android_large_nine_screen/android_large_nine_screen.dart';

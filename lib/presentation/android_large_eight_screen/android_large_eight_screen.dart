@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vansh_s_application2/presentation/android_large_eight_screen/widgets/kycc.dart';
 import '../../core/app_export.dart';
 import 'widgets/kycdocuments_item_widget.dart';
 
@@ -25,7 +26,9 @@ class AndroidLargeEightScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
               ),
               SizedBox(height: 12.v),
-              _buildKycDocuments(context)
+              _buildKycDocuments(context),
+              _buildKyccDocuments(context)
+
             ],
           ),
         ),
@@ -84,9 +87,31 @@ class AndroidLargeEightScreen extends StatelessWidget {
             height: 70.v,
           );
         },
-        itemCount: 2,
+        itemCount: 1,
         itemBuilder: (context, index) {
           return KycdocumentsItemWidget();
+        },
+      ),
+    );
+  }
+  Widget _buildKyccDocuments(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 25.h,
+        left: 24.h,
+        right: 30.h,
+      ),
+      child: ListView.separated(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            height: 70.v,
+          );
+        },
+        itemCount: 1,
+        itemBuilder: (context, index) {
+          return Kycc();
         },
       ),
     );
