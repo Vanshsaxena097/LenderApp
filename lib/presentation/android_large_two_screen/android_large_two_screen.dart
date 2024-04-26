@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
@@ -6,6 +7,7 @@ import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'package:flutter/gestures.dart';
+import '../android_large_five_screen/android_large_five_screen.dart';
 import '../android_large_two_screen/android_large_two_screen.dart';
 
 class AndroidLargeTwoScreen extends StatelessWidget {
@@ -16,6 +18,43 @@ class AndroidLargeTwoScreen extends StatelessWidget {
   TextEditingController phoneController = TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<void> _signUp(BuildContext context) async {
+    try {
+      // Check if the email already exists
+      QuerySnapshot emailSnapshot = await FirebaseFirestore.instance
+          .collection('lenders')
+          .where('email', isEqualTo: emailController.text)
+          .get();
+
+      if (emailSnapshot.docs.isNotEmpty) {
+        // If email exists, show error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Email already exists')),
+        );
+      } else {
+        // If email doesn't exist, proceed with sign-up
+        await FirebaseFirestore.instance.collection('lenders').add({
+          'email': emailController.text,
+          'password': passwordController.text,
+          'phone': phoneController.text,
+        });
+
+        // Navigate to the next screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AndroidLargeFiveScreen()),
+        );
+      }
+    } catch (e) {
+      // Handle sign-up errors
+      print('Failed to sign up: $e');
+      // Show error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to sign up')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +97,11 @@ class AndroidLargeTwoScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 45.v),
-                GestureDetector(
-                  onTap: () {
-                    // Handle signup action
-                    if (_formKey.currentState!.validate()) {
-                      // Perform signup logic here
-                    }
+                ElevatedButton(
+                  onPressed: () {
+                    _signUp(context); // Call the _signUp method when button is pressed
                   },
-                  child: CustomElevatedButton(
-                    height: 52.v,
-                    text: "Sign Up",
-                    buttonStyle: CustomButtonStyles.fillPrimary,
-                    buttonTextStyle: CustomTextStyles.titleSmallPrimaryContainer,
-                  ),
+                  child: Text('Sign Up'),
                 ),
                 SizedBox(height: 16.v),
                 _buildRowFlatColor(),
@@ -83,7 +114,7 @@ class AndroidLargeTwoScreen extends StatelessWidget {
                         style: theme.textTheme.bodyMedium,
                       ),
                       TextSpan(
-                        text: "Log in",
+                        text: "Login",
                         style: CustomTextStyles.titleSmallPrimary_1.copyWith(
                           decoration: TextDecoration.underline,
                         ),
@@ -164,7 +195,7 @@ class AndroidLargeTwoScreen extends StatelessWidget {
         children: [
           Container(
             height: 56.v,
-            width: 166.h,
+            width: 135.h,
             padding: EdgeInsets.symmetric(vertical: 16.v),
             decoration: AppDecoration.fillGray.copyWith(
               borderRadius: BorderRadiusStyle.roundedBorder8,
@@ -178,7 +209,7 @@ class AndroidLargeTwoScreen extends StatelessWidget {
           ),
           Container(
             height: 56.v,
-            width: 165.h,
+            width: 135.h,
             padding: EdgeInsets.symmetric(vertical: 16.v),
             decoration: AppDecoration.fillGray.copyWith(
               borderRadius: BorderRadiusStyle.roundedBorder8,

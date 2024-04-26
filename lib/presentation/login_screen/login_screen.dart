@@ -8,14 +8,60 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import '../android_large_five_screen/android_large_five_screen.dart';
 import '../android_large_two_screen/android_large_two_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Future<void> loginUser(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      String email = _emailController.text;
+      String password = _passwordController.text;
+
+      try {
+        QuerySnapshot snapshot = await FirebaseFirestore.instance
+            .collection('lenders')
+
+            .where('email', isEqualTo: email)
+            .get();
+
+        if (snapshot.docs.isNotEmpty) {
+          DocumentSnapshot userDoc = snapshot.docs.first;
+          String storedPassword = userDoc.get('password');
+
+          if (password == storedPassword) {
+            // Navigate to AndroidLargeSixScreen
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AndroidLargeFiveScreen(),
+              ),
+            );
+          } else {
+            showSnackbar(context, 'Incorrect password');
+          }
+        } else {
+          showSnackbar(context, 'User not found');
+        }
+      } catch (e) {
+        showSnackbar(context, 'Failed to login: $e');
+      }
+    }
+  }
+  void showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +87,9 @@ class LoginScreen extends StatelessWidget {
                   style: CustomTextStyles.titleLargePoppinsGray500,
                 ),
                 SizedBox(height: 77.v),
-                _buildTextField("Email", emailController, false),
+                _buildTextField("Email", _emailController, false),
                 SizedBox(height: 16.v),
-                _buildTextField("Password", passwordController, true),
+                _buildTextField("Password", _passwordController, true),
                 SizedBox(height: 17.v),
                 TextButton(
                   onPressed: () {
@@ -57,14 +103,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 45.v),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AndroidLargeFiveScreen(),
-                    ),
-                  );
-                },
+                onPressed: () => loginUser(context),
                 child: Text('Login'),
               ),
                 SizedBox(height: 16.v),
