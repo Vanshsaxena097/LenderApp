@@ -1,71 +1,73 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_text_form_field.dart'; // ignore_for_file: must_be_immutable
+import '../../widgets/custom_text_form_field.dart';
+import 'lendermodal.dart'; // ignore_for_file: must_be_immutable
 
 // ignore_for_file: must_be_immutable
 class AndroidLargeNineScreen extends StatelessWidget {
-  AndroidLargeNineScreen({Key? key})
-      : super(
-          key: key,
-        );
-
-  TextEditingController userNameController = TextEditingController();
-
-  TextEditingController companyRegistrationController = TextEditingController();
-
-  TextEditingController annualIncomeValueController = TextEditingController();
-
-  TextEditingController taxIdentificationController = TextEditingController();
-
-  TextEditingController voterIdCardValueController = TextEditingController();
-
-  TextEditingController driversLicenseValueController = TextEditingController();
+  AndroidLargeNineScreen({Key? key}) : super(key: key);
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController companyRegistrationController = TextEditingController();
+  TextEditingController annualIncomeValueController = TextEditingController();
+  TextEditingController taxIdentificationController = TextEditingController();
+  TextEditingController voterIdCardValueController = TextEditingController();
+  TextEditingController driversLicenseValueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Form(
-              key: _formKey,
-              child: SizedBox(
-                width: double.maxFinite,
-                child: Column(
-                  children: [
-                    _buildDownloadTwenty(context),
-                    CustomImageView(
-                      imagePath: ImageConstant.imgDownload2237x47,
-                      height: 37.v,
-                      width: 47.h,
-                      alignment: Alignment.centerLeft,
-                    ),
-                    SizedBox(height: 11.v),
-                    _buildUserName(context),
-                    SizedBox(height: 39.v),
-                    _buildCompanyRegistration(context),
-                    SizedBox(height: 39.v),
-                    _buildAnnualIncomeValue(context),
-                    SizedBox(height: 39.v),
-                    _buildTaxIdentification(context),
-                    SizedBox(height: 39.v),
-                    _buildVoterIdCardValue(context),
-                    SizedBox(height: 39.v),
-                    _buildDriversLicenseValue(context),
-                    SizedBox(height: 14.v),
-                    _buildSubmit(context),
-                    SizedBox(height: 7.v)
-                  ],
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 18.h),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildDownloadTwenty(context),
+                SizedBox(height: 11.v),
+                _buildTextFormField(
+                  controller: userNameController,
+                  hintText: "Username/Institution Name",
                 ),
-              ),
+                SizedBox(height: 10.v),
+                _buildTextFormField(
+                  controller: companyRegistrationController,
+                  hintText: "Company Registration Number",
+                  textInputType: TextInputType.number,
+                ),
+                SizedBox(height: 10.v),
+                _buildTextFormField(
+                  controller: annualIncomeValueController,
+                  hintText: "Annual Income",
+                ),
+                SizedBox(height: 10.v),
+                _buildTextFormField(
+                  controller: taxIdentificationController,
+                  hintText: "Tax Identification Number",
+                  textInputType: TextInputType.number,
+                ),
+                SizedBox(height: 10.v),
+                _buildTextFormField(
+                  controller: voterIdCardValueController,
+                  hintText: "Voter ID Card",
+                ),
+                SizedBox(height: 10.v),
+                _buildTextFormField(
+                  controller: driversLicenseValueController,
+                  hintText: "Driver's License",
+                  textInputAction: TextInputAction.done,
+                ),
+                SizedBox(height: 14.v),
+                _buildSubmitButton(context),
+                SizedBox(height: 7.v),
+              ],
             ),
           ),
         ),
@@ -73,14 +75,10 @@ class AndroidLargeNineScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
   Widget _buildDownloadTwenty(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      padding: EdgeInsets.symmetric(
-        horizontal: 18.h,
-        vertical: 44.v,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 18.h, vertical: 44.v),
       decoration: AppDecoration.fillYellow.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder60,
       ),
@@ -93,11 +91,7 @@ class AndroidLargeNineScreen extends StatelessWidget {
             margin: EdgeInsets.only(top: 2.v),
           ),
           Padding(
-            padding: EdgeInsets.only(
-              left: 10.h,
-              top: 11.v,
-              bottom: 7.v,
-            ),
+            padding: EdgeInsets.only(left: 9.h, top: 11.v, bottom: 7.v ,right: 0.v),
             child: Text(
               "KYC Documents",
               style: theme.textTheme.headlineLarge,
@@ -108,106 +102,66 @@ class AndroidLargeNineScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildUserName(BuildContext context) {
+  Widget _buildTextFormField({
+    required TextEditingController controller,
+    required String hintText,
+    TextInputType? textInputType,
+    TextInputAction? textInputAction,
+  }) {
     return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 24.h,
-      ),
+      padding: EdgeInsets.only(bottom: 39.v),
       child: CustomTextFormField(
-        controller: userNameController,
-        hintText: "Username/Institution Name ",
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: 6.h,
-          vertical: 15.v,
-        ),
+        controller: controller,
+        hintText: hintText,
+        textInputType: textInputType,
+        textInputAction: textInputAction,
       ),
     );
   }
 
-  /// Section Widget
-  Widget _buildCompanyRegistration(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 24.h,
-      ),
-      child: CustomTextFormField(
-        controller: companyRegistrationController,
-        hintText: "Company Registration Number",
-        textInputType: TextInputType.number,
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildAnnualIncomeValue(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 24.h,
-      ),
-      child: CustomTextFormField(
-        controller: annualIncomeValueController,
-        hintText: "Annual Income",
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildTaxIdentification(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 24.h,
-      ),
-      child: CustomTextFormField(
-        controller: taxIdentificationController,
-        hintText: "Tax Identification Number",
-        textInputType: TextInputType.number,
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildVoterIdCardValue(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 24.h,
-      ),
-      child: CustomTextFormField(
-        controller: voterIdCardValueController,
-        hintText: "Voter ID Card",
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildDriversLicenseValue(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 24.h,
-      ),
-      child: CustomTextFormField(
-        controller: driversLicenseValueController,
-        hintText: "Driver's License",
-        textInputAction: TextInputAction.done,
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildSubmit(BuildContext context) {
+  Widget _buildSubmitButton(BuildContext context) {
     return CustomElevatedButton(
       height: 39.v,
       width: 106.h,
       text: "Submit",
-      margin: EdgeInsets.only(right: 24.h),
+      onPressed: () => _submitForm(context),
       buttonTextStyle: theme.textTheme.titleLarge!,
       alignment: Alignment.centerRight,
     );
+  }
+
+  void _submitForm(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      final detail = LenderDetail(
+        userName: userNameController.text,
+        companyRegistration: companyRegistrationController.text,
+        annualIncomeValue: annualIncomeValueController.text,
+        taxIdentification: taxIdentificationController.text,
+        voterIdCardValue: voterIdCardValueController.text,
+        driversLicenseValue: driversLicenseValueController.text,
+      );
+
+      _saveToCollection(detail);
+
+      // Optionally, you can navigate to another screen or show a success message here
+    }
+  }
+
+  void _saveToCollection(LenderDetail detail) {
+    // Assuming you're using Firebase Firestore for database operations
+    FirebaseFirestore.instance.collection('lenders_detail').add({
+      'userName': detail.userName,
+      'companyRegistration': detail.companyRegistration,
+      'annualIncomeValue': detail.annualIncomeValue,
+      'taxIdentification': detail.taxIdentification,
+      'voterIdCardValue': detail.voterIdCardValue,
+      'driversLicenseValue': detail.driversLicenseValue,
+    }).then((value) {
+      // Data saved successfully
+      print("Data saved successfully");
+    }).catchError((error) {
+      // Error occurred while saving data
+      print("Error: $error");
+    });
   }
 }
