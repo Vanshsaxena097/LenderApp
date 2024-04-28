@@ -199,7 +199,7 @@ class AndroidLargeFiveScreen extends StatelessWidget {
             '/page1',
             '/farmer_condition_screen',
             '/page3',
-            '/page4',
+            '/transaction',
             '/page5',
             '/android_large_eight_screen',
           ];

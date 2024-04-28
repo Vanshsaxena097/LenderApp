@@ -6,7 +6,8 @@ import '../presentation/android_large_ten_screen/android_large_ten_screen.dart';
 import '../presentation/android_large_two_screen/android_large_two_screen.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/farmer_condition/farmer_condition_screen.dart';
-import '../presentation/login_screen/login_screen.dart'; // ignore_for_file: must_be_immutable
+import '../presentation/login_screen/login_screen.dart';
+import '../presentation/transaction/transaction.dart'; // ignore_for_file: must_be_immutable
 
 // ignore_for_file: must_be_immutable
 class AppRoutes {
@@ -23,6 +24,7 @@ class AppRoutes {
   static const String appNavigationScreen = '/app_navigation_screen';
   static const String androidLargeTenScreen = '/android_large_ten_screen';
   static const String farmerConditionScreen = '/farmer_condition_screen';
+  static const String transaction = '/transaction';
 
   static const String initialRoute = '/initialRoute';
 
@@ -35,6 +37,7 @@ class AppRoutes {
     appNavigationScreen: (context) => AppNavigationScreen(),
     androidLargeTenScreen:(context) => AndroidLargeTenScreen(),
     farmerConditionScreen: (context) => FarmerConditionsScreen(),
+    transaction: (context) => Transaction(),
     initialRoute: (context) => LoginScreen()
 
   };
