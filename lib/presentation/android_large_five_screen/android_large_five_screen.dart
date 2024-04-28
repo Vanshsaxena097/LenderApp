@@ -173,8 +173,8 @@ class AndroidLargeFiveScreen extends StatelessWidget {
 
   Widget _buildAndroidLargeSix(BuildContext context) {
     List<String> texts = [
-      "Available Lenders",
-      "My Lenders",
+      "Available Farmers",
+      "My Farmers",
       "Booking History",
       "Transaction History",
       "Smart Analysis",
@@ -196,8 +196,8 @@ class AndroidLargeFiveScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           // Example routes
           List<String> routes = [
-            '/page1',
             '/farmer_condition_screen',
+            '/my_farmers',
             '/page3',
             '/transaction',
             '/page5',
