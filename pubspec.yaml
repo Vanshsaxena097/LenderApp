@@ -1,12 +1,12 @@
 name: vansh_s_application2
 description: A new Flutter project.
 version: 1.0.0+1
-environment: 
+environment:
   sdk: '>=2.12.0 <3.0.0'
-dependencies: 
-  flutter: 
+dependencies:
+  flutter:
     sdk: flutter
-  flutter_localizations: 
+  flutter_localizations:
     sdk: flutter
   cached_network_image: ^3.3.0
   flutter_svg: ^2.0.9
@@ -16,21 +16,26 @@ dependencies:
   firebase_auth: ^4.5.0
   cloud_firestore: ^4.15.8
   firebase_database: ^10.1.0
-dev_dependencies: 
-  flutter_test: 
+  flutter_launcher_icons: ^0.13.1
+dev_dependencies:
+  flutter_test:
     sdk: flutter
-flutter: 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.jpg"
+flutter:
   uses-material-design: true
-  assets: 
+  assets:
     - assets/
     - assets/images/
-  fonts: 
+  fonts:
     - family: Inria Serif
-      fonts: 
+      fonts:
         - asset: assets/fonts/InriaSerifItalic.ttf
           weight: 400
     - family: Poppins
-      fonts: 
+      fonts:
         - asset: assets/fonts/PoppinsSemiBold.ttf
           weight: 600
         - asset: assets/fonts/PoppinsMedium.ttf
