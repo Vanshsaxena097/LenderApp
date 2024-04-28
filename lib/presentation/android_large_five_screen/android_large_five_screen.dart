@@ -197,7 +197,7 @@ class AndroidLargeFiveScreen extends StatelessWidget {
           // Example routes
           List<String> routes = [
             '/page1',
-            '/page2',
+            '/farmer_condition_screen',
             '/page3',
             '/page4',
             '/page5',
