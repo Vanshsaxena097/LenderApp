@@ -131,7 +131,7 @@ class AndroidLargeFiveScreen extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 8.h),
                     child: Text(
-                      "Hello! RamPrasad",
+                      "Hello! ",
                       style: theme.textTheme.headlineSmall,
                     ),
                   ),
@@ -139,7 +139,7 @@ class AndroidLargeFiveScreen extends StatelessWidget {
                 CustomElevatedButton(
                   height: 46.v,
                   width: 276.h,
-                  text: "Join Our Farmers Community Today",
+                  text: "Join Our Lenders Community Today",
                   buttonStyle: CustomButtonStyles.fillErrorContainer,
                   buttonTextStyle: CustomTextStyles.bodyMediumInter,
                   alignment: Alignment.bottomCenter,
@@ -147,15 +147,7 @@ class AndroidLargeFiveScreen extends StatelessWidget {
               ],
             ),
           ),
-          CustomImageView(
-            imagePath: ImageConstant.imgDownload19,
-            height: 32.v,
-            width: 31.h,
-            margin: EdgeInsets.only(
-              top: 31.v,
-              bottom: 11.v,
-            ),
-          ),
+
           CustomImageView(
             imagePath: ImageConstant.imgDownload19,
             height: 36.v,
